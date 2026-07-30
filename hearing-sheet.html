@@ -1,0 +1,296 @@
+<title>製品ヒアリングシート｜医療機器該当性の初期診断</title>
+
+<style>
+  :root{
+    --bg:#F7F7F5; --panel:#FFFFFF; --panel-2:#EEEFEC; --field:#F2F3F0;
+    --ink:#15181A; --ink-2:#4A5155; --ink-3:#787F83;
+    --rule:#D4D7D3; --rule-2:#E5E7E3;
+    --acc:#1C6B58; --acc-soft:rgba(28,107,88,.08);
+    --fac:#8A5A22; --fac-soft:rgba(138,90,34,.10);
+    --f-disp:"Hiragino Mincho ProN","YuMincho","Yu Mincho",serif;
+    --f-body:"Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP",-apple-system,sans-serif;
+    --f-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#131517; --panel:#1A1D1F; --panel-2:#222628; --field:#232729;
+      --ink:#E8EAE8; --ink-2:#A6ADB0; --ink-3:#7A8184;
+      --rule:#2E3234; --rule-2:#262A2C;
+      --acc:#5CC3A5; --acc-soft:rgba(92,195,165,.13);
+      --fac:#D0A45E; --fac-soft:rgba(208,164,94,.13);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#131517; --panel:#1A1D1F; --panel-2:#222628; --field:#232729;
+    --ink:#E8EAE8; --ink-2:#A6ADB0; --ink-3:#7A8184;
+    --rule:#2E3234; --rule-2:#262A2C;
+    --acc:#5CC3A5; --acc-soft:rgba(92,195,165,.13);
+    --fac:#D0A45E; --fac-soft:rgba(208,164,94,.13);
+  }
+  :root[data-theme="light"]{
+    --bg:#F7F7F5; --panel:#FFFFFF; --panel-2:#EEEFEC; --field:#F2F3F0;
+    --ink:#15181A; --ink-2:#4A5155; --ink-3:#787F83;
+    --rule:#D4D7D3; --rule-2:#E5E7E3;
+    --acc:#1C6B58; --acc-soft:rgba(28,107,88,.08);
+    --fac:#8A5A22; --fac-soft:rgba(138,90,34,.10);
+  }
+
+  html{ -webkit-text-size-adjust:100%; }
+  body{ background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:15.5px; line-height:1.8; font-feature-settings:"palt" 1; overflow-x:hidden; }
+  .doc{ max-width:840px; margin:0 auto; padding:2.6rem 1.1rem 5rem; }
+  @media (min-width:800px){ .doc{ padding:3rem 2rem 6rem; } }
+
+  .mast{ border-bottom:2px solid var(--ink); padding-bottom:1.2rem; }
+  .mast .co{ font-family:var(--f-mono); font-size:.66rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); }
+  h1{ font-family:var(--f-disp); font-weight:600; font-size:clamp(1.4rem,1.05rem + 1.6vw,1.95rem); line-height:1.42; margin-top:.6rem; }
+  .mast .sub{ color:var(--ink-2); margin-top:.8rem; font-size:.94rem; max-width:62ch; }
+
+  .intro{ border:1px solid var(--rule); border-left:3px solid var(--acc); background:var(--acc-soft); padding:1rem 1.15rem; margin-top:1.4rem; }
+  .intro p{ font-size:.87rem; color:var(--ink-2); margin:0; line-height:1.85; }
+  .intro p+p{ margin-top:.5rem; }
+  .intro b{ color:var(--ink); }
+
+  section{ margin-top:2.4rem; }
+  .sh{ display:flex; gap:.8rem; align-items:baseline; border-bottom:1px solid var(--ink); padding-bottom:.4rem; margin-bottom:.5rem; }
+  .sh .n{ font-family:var(--f-mono); font-size:.7rem; color:var(--acc); letter-spacing:.08em; }
+  h2{ font-family:var(--f-disp); font-weight:600; font-size:1.12rem; line-height:1.45; }
+  .why{ font-size:.8rem; color:var(--ink-3); line-height:1.7; margin-bottom:.9rem; }
+
+  .fields{ display:flex; flex-direction:column; gap:.5rem; }
+  .f{ display:grid; grid-template-columns:1fr; gap:.25rem; }
+  @media (min-width:640px){ .f{ grid-template-columns:12rem minmax(0,1fr); gap:.9rem; align-items:start; } }
+  .f .lb{ font-size:.85rem; color:var(--ink); font-weight:600; padding-top:.45rem; display:flex; gap:.35rem; align-items:baseline; flex-wrap:wrap; }
+  .f .in{ background:var(--field); border:1px solid var(--rule-2); border-bottom:1px solid var(--rule); min-height:2.3rem; padding:.45rem .7rem; font-size:.85rem; color:var(--ink-3); }
+  .f .in.tall{ min-height:5rem; }
+  .f .in.taller{ min-height:7.5rem; }
+  .f .hint{ font-size:.75rem; color:var(--ink-3); line-height:1.6; margin-top:.15rem; }
+  .req{ font-family:var(--f-mono); font-size:.58rem; padding:.1rem .3rem; background:var(--acc-soft); color:var(--acc); border:1px solid var(--acc); white-space:nowrap; }
+  .fmark{ font-family:var(--f-mono); font-size:.58rem; padding:.1rem .3rem; background:var(--fac-soft); color:var(--fac); border:1px solid var(--fac); white-space:nowrap; }
+
+  .opts{ display:flex; flex-wrap:wrap; gap:.35rem; margin-top:.2rem; }
+  .opt{ font-size:.8rem; padding:.3rem .6rem; border:1px solid var(--rule); background:var(--panel); color:var(--ink-2); }
+  .opt::before{ content:"□ "; color:var(--ink-3); }
+
+  .factory{ border:2px solid var(--fac); background:var(--fac-soft); padding:1.1rem 1.2rem 1.3rem; margin-top:1.4rem; }
+  .factory .t{ font-family:var(--f-mono); font-size:.64rem; letter-spacing:.13em; text-transform:uppercase; color:var(--fac); display:block; margin-bottom:.5rem; }
+  .factory h3{ font-family:var(--f-disp); font-size:1.02rem; margin:0 0 .5rem; }
+  .factory p{ font-size:.85rem; color:var(--ink-2); margin:0 0 .8rem; line-height:1.8; }
+  .factory b{ color:var(--ink); }
+
+  .plain{ border:1px solid var(--rule); background:var(--panel-2); padding:1.1rem 1.2rem; margin-top:1.2rem; }
+  .plain .t{ font-family:var(--f-mono); font-size:.64rem; letter-spacing:.13em; text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:.6rem; }
+  .plain pre{ font-family:var(--f-mono); font-size:.76rem; line-height:1.85; color:var(--ink-2); white-space:pre-wrap; word-break:break-word; margin:0; }
+
+  .note{ border:1px solid var(--rule); border-left:3px solid var(--ink); background:var(--panel); padding:1rem 1.15rem; margin-top:1.4rem; }
+  .note .t{ font-family:var(--f-mono); font-size:.64rem; letter-spacing:.13em; text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:.45rem; }
+  .note p{ font-size:.85rem; color:var(--ink-2); margin:0; line-height:1.85; }
+  .note p+p{ margin-top:.5rem; }
+  .note b{ color:var(--ink); }
+
+  footer{ margin-top:3rem; padding-top:1.2rem; border-top:1px solid var(--rule); }
+  footer p{ font-size:.76rem; color:var(--ink-3); line-height:1.8; }
+
+  @media print{
+    body{ background:#fff; color:#000; font-size:10.5pt; }
+    .doc{ max-width:none; padding:0; }
+    .f .in{ background:#fff; border:1px solid #999; }
+    section{ break-inside:avoid; }
+    .factory, .intro, .note{ break-inside:avoid; }
+    .plain{ display:none; }
+  }
+</style>
+
+<div class="doc">
+
+  <header class="mast">
+    <div class="co">〔社名〕 ／ 医療機器・化粧品 製造販売元受託</div>
+    <h1>製品ヒアリングシート</h1>
+    <p class="sub">医療機器該当性の初期診断（無償）にあたり、製品の情報をお伺いします。<strong>分かる範囲でご記入いただければ結構です。</strong>空欄があっても診断は進められます。</p>
+  </header>
+
+  <div class="intro">
+    <p><b>ご記入の前に。</b>このシートは、御社の製品が薬機法上「医療機器」に該当しうるか、該当する場合はどの区分になるか、そして<b>医療機器として届出・認証した場合にどのような効能を表示できるようになるか</b>を判定するためのものです。</p>
+    <p><b>橙色の <span class="fmark">工場確認</span> が付いた項目は、製造委託先でないと分からない内容です。</b>本シートの末尾に工場へ転送できる抜粋を用意しましたので、そちらをお使いください。この項目が最も判定に効きますが、お手元で分かる範囲だけ先にお送りいただいても構いません。</p>
+    <p>いただいた情報は秘密として取り扱います。必要に応じて秘密保持契約を締結したうえで承ります。</p>
+  </div>
+
+  <!-- 1 -->
+  <section>
+    <div class="sh"><span class="n">01</span><h2>御社について</h2></div>
+    <p class="why">受託の可否判断と、ご連絡先の確認のために伺います。</p>
+    <div class="fields">
+      <div class="f"><span class="lb">会社名 <span class="req">必須</span></span><div class="in"></div></div>
+      <div class="f"><span class="lb">ご担当者名・部署</span><div class="in"></div></div>
+      <div class="f"><span class="lb">連絡先 <span class="req">必須</span></span><div class="in"><span style="font-size:.78rem">メールアドレス／電話番号</span></div></div>
+      <div class="f"><span class="lb">自社サイトURL</span><div class="in"></div></div>
+      <div class="f"><span class="lb">医療機器の取扱経験</span><div class="in"><div class="opts"><span class="opt">はじめて</span><span class="opt">過去にある</span><span class="opt">現在も扱っている</span></div></div></div>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section>
+    <div class="sh"><span class="n">02</span><h2>製品の基本情報</h2></div>
+    <p class="why">現在どのように販売されているかを把握します。出荷数は料金設計の前提になります。</p>
+    <div class="fields">
+      <div class="f"><span class="lb">製品名 <span class="req">必須</span></span><div class="in"></div></div>
+      <div class="f"><span class="lb">現在の販売状況</span><div class="in"><div class="opts"><span class="opt">販売中</span><span class="opt">開発中・未発売</span><span class="opt">販売終了</span><span class="opt">輸入を検討中</span></div></div></div>
+      <div class="f">
+        <span class="lb">医療機器としての<br>現在の状況</span>
+        <div class="in"><div class="opts"><span class="opt">未取得（雑貨として販売）</span><span class="opt">すでに認証・届出済み</span><span class="opt">申請・審査中</span><span class="opt">分からない</span></div></div>
+        <p class="hint"><strong>すでに認証・届出済みの場合、下欄に認証番号と現在の製造販売業者をお書きください。</strong>該非判定の大半を省略でき、最も早くご案内できるケースです。</p>
+      </div>
+      <div class="f"><span class="lb">（認証・届出済みの場合）<br>認証番号・現在の製造販売業者</span><div class="in tall"></div><p class="hint">切替のご相談も承ります。現契約の解約条件が分かればあわせてお書きください。</p></div>
+      <div class="f"><span class="lb">商品ページURL <span class="req">必須</span></span><div class="in tall"><span style="font-size:.78rem">自社EC・楽天・Amazon・Qoo10など、掲載しているものすべて</span></div></div>
+      <div class="f"><span class="lb">販売価格（税込）</span><div class="in"></div></div>
+      <div class="f"><span class="lb">年間の出荷数<br>（見込みで可）</span><div class="in"></div></div>
+      <div class="f"><span class="lb">主な販売チャネル</span><div class="in"><div class="opts"><span class="opt">自社EC</span><span class="opt">モール</span><span class="opt">卸・小売</span><span class="opt">サロン・業務用</span><span class="opt">その他</span></div></div></div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section>
+    <div class="sh"><span class="n">03</span><h2>製品の構造と作用の原理</h2></div>
+    <p class="why"><strong>この項目が判定を決めます。</strong>医療機器に該当するかどうかは、見た目や用途ではなく「人体にどのような物理的作用を及ぼすか」で決まるためです。数値まで分かると精度が上がります。</p>
+    <div class="fields">
+      <div class="f">
+        <span class="lb">作用の原理 <span class="req">必須</span> <span class="fmark">工場確認</span></span>
+        <div class="in tall">
+          <div class="opts">
+            <span class="opt">磁気（永久磁石）</span><span class="opt">低周波・EMS</span><span class="opt">中周波・干渉波</span>
+            <span class="opt">温熱・ヒーター</span><span class="opt">振動・打撃</span><span class="opt">超音波</span>
+            <span class="opt">高周波・RF</span><span class="opt">光（LED）</span><span class="opt">光（IPL・レーザー）</span>
+            <span class="opt">微弱電流</span><span class="opt">吸引</span><span class="opt">加圧・着圧</span>
+            <span class="opt">遠赤外線</span><span class="opt">物理形状のみ</span><span class="opt">その他</span>
+          </div>
+        </div>
+      </div>
+      <div class="f">
+        <span class="lb">出力・仕様の数値 <span class="fmark">工場確認</span></span>
+        <div class="in tall"></div>
+        <p class="hint">例：磁束密度〔　〕mT／周波数〔　〕Hz／出力〔　〕W／到達温度〔　〕℃／波長〔　〕nm／振動数〔　〕回毎分。<strong>該当するものだけで結構です。</strong></p>
+      </div>
+      <div class="f"><span class="lb">電源</span><div class="in"><div class="opts"><span class="opt">乾電池</span><span class="opt">内蔵充電池</span><span class="opt">USB</span><span class="opt">AC電源</span><span class="opt">電源不要</span></div></div></div>
+      <div class="f"><span class="lb">人体に触れる部位の素材 <span class="fmark">工場確認</span></span><div class="in tall"></div><p class="hint">シリコーン、ステンレス、ABS樹脂、布地など。<strong>生物学的安全性試験の要否に関わります。</strong></p></div>
+      <div class="f"><span class="lb">使用する部位</span><div class="in"><div class="opts"><span class="opt">顔</span><span class="opt">頭部</span><span class="opt">首・肩</span><span class="opt">腹部</span><span class="opt">脚</span><span class="opt">足</span><span class="opt">全身</span></div></div></div>
+      <div class="f"><span class="lb">1回の使用時間・頻度</span><div class="in"></div></div>
+      <div class="f"><span class="lb">取扱説明書・仕様書 <span class="fmark">工場確認</span></span><div class="in"><div class="opts"><span class="opt">日本語あり</span><span class="opt">英語あり</span><span class="opt">中国語のみ</span><span class="opt">なし</span></div></div></div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section>
+    <div class="sh"><span class="n">04</span><h2>訴求したいこと</h2></div>
+    <p class="why"><strong>診断の起点になる項目です。</strong>「何を言いたいか」から逆算して、どの区分で出すべきかを設計します。実現できるかどうかは判定後にお伝えしますので、まずは率直にご記入ください。</p>
+    <div class="fields">
+      <div class="f">
+        <span class="lb">現在使っている表現 <span class="req">必須</span></span>
+        <div class="in taller"></div>
+        <p class="hint">商品名・キャッチコピー・商品説明から、<strong>効果に関する部分をそのまま貼り付けてください。</strong>添削のためではなく、現状把握のために伺っています。</p>
+      </div>
+      <div class="f">
+        <span class="lb">本当は言いたいこと <span class="req">必須</span></span>
+        <div class="in taller"></div>
+        <p class="hint">「本当はこう書きたいが、書けないと言われた」という表現があれば、ぜひお書きください。<strong>ここが一番重要です。</strong></p>
+      </div>
+      <div class="f">
+        <span class="lb">指摘を受けたこと<br>はありますか</span>
+        <div class="in tall"><div class="opts"><span class="opt">モールから表示修正の指摘</span><span class="opt">広告代理店から出稿不可</span><span class="opt">行政からの指導</span><span class="opt">特にない</span></div></div>
+      </div>
+      <div class="f"><span class="lb">気になる競合製品</span><div class="in tall"></div><p class="hint">「この競合はこう書いているのに、なぜうちは駄目なのか」という例があれば</p></div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section>
+    <div class="sh"><span class="n">05</span><h2>製造について</h2></div>
+    <p class="why">医療機器として市場に出すには、製造所が所定の登録を受けている必要があります。<strong>海外工場の場合、工場側の協力が不可欠です。</strong></p>
+    <div class="fields">
+      <div class="f"><span class="lb">製造の形態</span><div class="in"><div class="opts"><span class="opt">自社製造</span><span class="opt">国内OEM</span><span class="opt">海外OEM</span><span class="opt">海外完成品の輸入</span></div></div></div>
+      <div class="f"><span class="lb">製造所の名称・所在地 <span class="req">必須</span></span><div class="in tall"></div></div>
+      <div class="f"><span class="lb">工場の登録状況 <span class="fmark">工場確認</span></span><div class="in"><div class="opts"><span class="opt">医療機器製造業の登録あり（国内）</span><span class="opt">外国製造業者の登録あり</span><span class="opt">登録なし</span><span class="opt">不明</span></div></div></div>
+      <div class="f"><span class="lb">工場は手続きに<br>協力してくれそうですか</span><div class="in"><div class="opts"><span class="opt">協力が得られる</span><span class="opt">交渉が必要</span><span class="opt">難しそう</span><span class="opt">未確認</span></div></div><p class="hint"><strong>案件が止まる最大の原因がここです。</strong>正直な見通しをお書きください。</p></div>
+      <div class="f"><span class="lb">製品の権利</span><div class="in"><div class="opts"><span class="opt">自社専用の設計・金型</span><span class="opt">工場の既製品に自社ブランド</span><span class="opt">不明</span></div></div></div>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section>
+    <div class="sh"><span class="n">06</span><h2>ご事情</h2></div>
+    <p class="why">ご提案の現実性を合わせるために伺います。予算・時期が合わない場合も、その旨を率直にお伝えします。</p>
+    <div class="fields">
+      <div class="f"><span class="lb">いつまでに実現したいか</span><div class="in"></div></div>
+      <div class="f"><span class="lb">ご予算の目安</span><div class="in"><div class="opts"><span class="opt">〜100万円</span><span class="opt">100〜300万円</span><span class="opt">300万円〜</span><span class="opt">判定を見てから</span></div></div></div>
+      <div class="f"><span class="lb">社内の決裁</span><div class="in"><div class="opts"><span class="opt">ご担当者で決裁可能</span><span class="opt">上長の承認が必要</span><span class="opt">役員会に諮る</span></div></div><p class="hint">社内説明用の資料をご用意しますので、遠慮なくお書きください。</p></div>
+      <div class="f"><span class="lb">過去のリコール・<br>行政指導の有無</span><div class="in"><div class="opts"><span class="opt">なし</span><span class="opt">あり</span></div></div></div>
+      <div class="f"><span class="lb">その他ご相談</span><div class="in taller"></div></div>
+    </div>
+  </section>
+
+  <!-- factory excerpt -->
+  <div class="factory">
+    <span class="t">工場・製造委託先への転送用</span>
+    <h3>この部分だけを製造委託先にお送りください</h3>
+    <p><b><span class="fmark">工場確認</span> が付いた項目をまとめました。</b>以下をそのままメールに貼り付けて、製造委託先にご確認いただけます。英語版が必要でしたらお申し付けください。</p>
+    <div class="plain" style="margin-top:0">
+      <span class="t">コピーして送信</span>
+<pre>【製品仕様に関するご確認のお願い】
+
+日本国内での医療機器としての届出・認証を検討しており、
+以下の情報が必要となっております。ご回答をお願いいたします。
+
+対象製品：〔製品名・型番〕
+
+■ 1. 作用の原理
+   （磁気／低周波／温熱／振動／超音波／高周波／光／
+     微弱電流／吸引／加圧／遠赤外線 等、該当するものすべて）
+   →
+
+■ 2. 出力・性能の数値
+   ・磁束密度（mT）        →
+   ・周波数（Hz）          →
+   ・出力（W／mA）         →
+   ・最高到達温度（℃）    →
+   ・波長（nm）            →
+   ・振動数（回／分）      →
+   ※該当項目のみで結構です
+
+■ 3. 人体に接触する部位の材質
+   （材料名・グレード。可能であれば材料証明書）
+   →
+
+■ 4. 電源の種類
+   →
+
+■ 5. 保有している試験成績書
+   （電気安全／EMC／生物学的安全性 等）
+   →
+
+■ 6. 貴社の登録状況
+   ・日本の医療機器 外国製造業者登録の有無 →
+   ・ISO 13485 認証の有無                  →
+   ・その他の品質マネジメント認証          →
+
+■ 7. 技術文書のご提供可否
+   （設計図面、部品表、製造工程figure等）
+   提供可否 →     言語 →
+
+■ 8. 日本での医療機器登録手続きへのご協力可否
+   →
+
+お手数をおかけしますが、よろしくお願いいたします。</pre>
+    </div>
+  </div>
+
+  <div class="note">
+    <span class="t">ご記入後の流れ</span>
+    <p><b>1〜2週間で診断結果をお返しします。</b>内容は、①現在の表示に含まれるリスク ②該当しうる区分とクラス分類 ③<b>医療機器化した場合に表示できるようになる効能</b> ④必要な手続きと試験 ⑤概算費用と期間 ⑥推奨する進め方、の6点です。</p>
+    <p><b>社内でご共有いただくための要約1枚も併せてお渡しします。</b>診断は無償で、契約を前提とするものではありません。「医療機器にしない方がよい」という結論になることもあり、その場合はその旨を理由とともにお伝えします。</p>
+  </div>
+
+  <footer>
+    <p>〔社名〕／〒〔郵便番号〕東京都葛飾区〔住所〕／〔電話番号〕／〔メールアドレス〕<br>
+    第二種医療機器製造販売業許可 〔許可番号〕（東京都知事）／化粧品製造販売業許可 〔許可番号〕（東京都知事）</p>
+    <p style="margin-top:.6rem">本シートでお預かりした情報は、医療機器該当性の判定および受託可否の検討にのみ使用し、第三者に開示いたしません。</p>
+  </footer>
+
+</div>
