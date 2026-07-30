@@ -1,0 +1,630 @@
+<title>受託実務フロー｜問い合わせから上市まで</title>
+
+<style>
+  :root{
+    --bg:#F5F6F4; --panel:#FFFFFF; --panel-2:#EBEDEA; --panel-3:#E2E4E1;
+    --ink:#15181A; --ink-2:#4A5155; --ink-3:#777E82;
+    --rule:#D5D8D4; --rule-2:#E5E7E4;
+    --us:#1C6B58;   --us-soft:rgba(28,107,88,.085);
+    --cl:#2B4C7E;   --cl-soft:rgba(43,76,126,.085);
+    --ex:#7A6A2E;   --ex-soft:rgba(122,106,46,.10);
+    --warn:#A03526; --warn-soft:rgba(160,53,38,.085);
+    --f-disp:"Hiragino Mincho ProN","YuMincho","Yu Mincho",serif;
+    --f-body:"Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP",-apple-system,sans-serif;
+    --f-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --measure:66ch;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#121415; --panel:#191C1E; --panel-2:#212527; --panel-3:#292D2F;
+      --ink:#E8EAE8; --ink-2:#A6ADB0; --ink-3:#7A8184;
+      --rule:#2D3133; --rule-2:#25292B;
+      --us:#5CC3A5;  --us-soft:rgba(92,195,165,.13);
+      --cl:#7FA6DB;  --cl-soft:rgba(127,166,219,.13);
+      --ex:#CFB86A;  --ex-soft:rgba(207,184,106,.13);
+      --warn:#E27766; --warn-soft:rgba(226,119,102,.13);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#121415; --panel:#191C1E; --panel-2:#212527; --panel-3:#292D2F;
+    --ink:#E8EAE8; --ink-2:#A6ADB0; --ink-3:#7A8184;
+    --rule:#2D3133; --rule-2:#25292B;
+    --us:#5CC3A5;  --us-soft:rgba(92,195,165,.13);
+    --cl:#7FA6DB;  --cl-soft:rgba(127,166,219,.13);
+    --ex:#CFB86A;  --ex-soft:rgba(207,184,106,.13);
+    --warn:#E27766; --warn-soft:rgba(226,119,102,.13);
+  }
+  :root[data-theme="light"]{
+    --bg:#F5F6F4; --panel:#FFFFFF; --panel-2:#EBEDEA; --panel-3:#E2E4E1;
+    --ink:#15181A; --ink-2:#4A5155; --ink-3:#777E82;
+    --rule:#D5D8D4; --rule-2:#E5E7E4;
+    --us:#1C6B58;  --us-soft:rgba(28,107,88,.085);
+    --cl:#2B4C7E;  --cl-soft:rgba(43,76,126,.085);
+    --ex:#7A6A2E;  --ex-soft:rgba(122,106,46,.10);
+    --warn:#A03526; --warn-soft:rgba(160,53,38,.085);
+  }
+
+  html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+  body{ background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:15.5px; line-height:1.85; font-feature-settings:"palt" 1; overflow-x:hidden; }
+  .doc{ max-width:1020px; margin:0 auto; padding:2.8rem 1.1rem 5rem; }
+  @media (min-width:900px){ .doc{ padding:3.2rem 2.2rem 6rem; } }
+
+  .mast{ border-bottom:3px double var(--ink); padding-bottom:1.3rem; }
+  .mast .meta{ display:flex; flex-wrap:wrap; gap:1.3rem; font-family:var(--f-mono); font-size:.66rem; letter-spacing:.1em; color:var(--ink-3); text-transform:uppercase; }
+  h1{ font-family:var(--f-disp); font-weight:600; font-size:clamp(1.5rem,1.05rem + 1.9vw,2.2rem); line-height:1.42; text-wrap:balance; margin-top:.8rem; }
+  .mast .sub{ color:var(--ink-2); margin-top:.85rem; max-width:var(--measure); font-size:.98rem; }
+
+  section{ padding-top:3rem; scroll-margin-top:1.2rem; }
+  .st{ display:flex; gap:.85rem; align-items:baseline; border-bottom:1px solid var(--ink); padding-bottom:.45rem; margin-bottom:1.2rem; }
+  .st .n{ font-family:var(--f-mono); font-size:.72rem; color:var(--ink-3); letter-spacing:.08em; }
+  h2{ font-family:var(--f-disp); font-weight:600; font-size:clamp(1.2rem,1rem + .9vw,1.55rem); line-height:1.45; text-wrap:balance; }
+  h3{ font-family:var(--f-disp); font-weight:600; font-size:1.02rem; line-height:1.5; margin-top:1.6rem; margin-bottom:.55rem; }
+  p{ max-width:var(--measure); }
+  p+p{ margin-top:.9rem; }
+  .lead{ color:var(--ink-2); font-size:.98rem; }
+  strong{ font-weight:600; }
+  a{ color:var(--us); }
+  :focus-visible{ outline:2px solid var(--us); outline-offset:3px; }
+
+  .box{ border:1px solid var(--rule); border-left-width:3px; background:var(--panel); padding:1rem 1.15rem; margin-top:1.2rem; }
+  .box .t{ font-family:var(--f-mono); font-size:.64rem; letter-spacing:.14em; text-transform:uppercase; display:block; margin-bottom:.45rem; color:var(--ink-3); }
+  .box p{ font-size:.87rem; color:var(--ink-2); max-width:none; margin:0; line-height:1.85; }
+  .box p+p{ margin-top:.55rem; }
+  .box b{ color:var(--ink); }
+  .box-key{ border-left-color:var(--ink); }
+  .box-us{ border-left-color:var(--us); background:var(--us-soft); } .box-us .t{ color:var(--us); }
+  .box-warn{ border-color:var(--warn); border-left-color:var(--warn); background:var(--warn-soft); } .box-warn .t{ color:var(--warn); }
+
+  /* fork */
+  .fork{ display:flex; flex-direction:column; gap:1px; background:var(--rule); border:1px solid var(--rule); margin-top:1.2rem; }
+  .fk{ background:var(--panel); padding:1rem 1.15rem 1.15rem; display:grid; gap:.55rem; }
+  @media (min-width:880px){ .fk{ grid-template-columns:150px minmax(0,1fr) 190px; gap:1.2rem; align-items:start; } }
+  .fk-h{ display:flex; flex-direction:column; gap:.25rem; }
+  .fk-h .lt{ font-family:var(--f-mono); font-size:.68rem; letter-spacing:.1em; padding:.16rem .45rem; align-self:flex-start; }
+  .lt-a{ background:var(--panel-3); color:var(--ink-2); border:1px solid var(--rule); }
+  .lt-b{ background:var(--us); color:var(--bg); }
+  .lt-c{ background:var(--us-soft); color:var(--us); border:1px solid var(--us); }
+  .lt-d{ background:var(--ex-soft); color:var(--ex); border:1px solid var(--ex); }
+  .lt-e{ background:var(--warn-soft); color:var(--warn); border:1px solid var(--warn); }
+  .fk-h h3{ margin:.15rem 0 0; font-size:.95rem; line-height:1.4; }
+  .fk-b p{ font-size:.84rem; color:var(--ink-2); max-width:none; margin:0; line-height:1.78; }
+  .fk-b b{ color:var(--ink); }
+  .fk-n{ display:flex; flex-direction:column; gap:.2rem; }
+  .fk-n .r{ display:flex; justify-content:space-between; gap:.5rem; font-size:.77rem; padding:.2rem 0; border-bottom:1px solid var(--rule-2); }
+  .fk-n .r:last-child{ border-bottom:none; }
+  .fk-n dt{ color:var(--ink-3); font-family:var(--f-mono); font-size:.68rem; }
+  .fk-n dd{ font-family:var(--f-mono); font-variant-numeric:tabular-nums; color:var(--ink); white-space:nowrap; font-size:.76rem; }
+
+  /* steps */
+  .flow{ display:flex; flex-direction:column; gap:1px; background:var(--rule); border:1px solid var(--rule); margin-top:1.2rem; }
+  .sp{ background:var(--panel); padding:1.15rem 1.2rem 1.35rem; display:grid; gap:.85rem; }
+  @media (min-width:900px){ .sp{ grid-template-columns:165px minmax(0,1fr); gap:1.5rem; } }
+  .sp-h{ display:flex; flex-direction:column; gap:.28rem; }
+  .sp-h .num{ font-family:var(--f-mono); font-size:.66rem; letter-spacing:.12em; color:var(--ink-3); }
+  .sp-h h3{ margin:0; font-size:1rem; line-height:1.4; }
+  .sp-h .dur{ font-family:var(--f-mono); font-size:.68rem; color:var(--us); margin-top:.15rem; }
+  .sp-h .fee{ font-family:var(--f-mono); font-size:.66rem; color:var(--ink-3); }
+  .sp-b{ display:flex; flex-direction:column; gap:.7rem; }
+  .lane{ display:grid; grid-template-columns:1fr; gap:.3rem; }
+  @media (min-width:620px){ .lane{ grid-template-columns:4.6rem minmax(0,1fr); gap:.75rem; align-items:start; } }
+  .lane .lk{ font-family:var(--f-mono); font-size:.6rem; letter-spacing:.08em; padding:.16rem .35rem; text-align:center; white-space:nowrap; }
+  .lk-us{ background:var(--us-soft); color:var(--us); border:1px solid var(--us); }
+  .lk-cl{ background:var(--cl-soft); color:var(--cl); border:1px solid var(--cl); }
+  .lk-ex{ background:var(--ex-soft); color:var(--ex); border:1px solid var(--ex); }
+  .lane .lv{ font-size:.85rem; color:var(--ink-2); line-height:1.78; }
+  .lane .lv b{ color:var(--ink); }
+  .lane .lv ul{ list-style:none; display:flex; flex-direction:column; gap:.22rem; margin-top:.15rem; }
+  .lane .lv li{ padding-left:.95rem; position:relative; }
+  .lane .lv li::before{ content:"▸"; position:absolute; left:0; color:var(--ink-3); font-size:.68rem; }
+  .out{ background:var(--panel-2); border-left:2px solid var(--ink); padding:.5rem .7rem; font-size:.84rem; }
+  .out .ok{ font-family:var(--f-mono); font-size:.6rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:.15rem; }
+  .rev{ background:var(--us-soft); border-left:2px solid var(--us); padding:.5rem .7rem; font-size:.84rem; color:var(--ink); }
+  .rev .ok{ font-family:var(--f-mono); font-size:.6rem; letter-spacing:.1em; text-transform:uppercase; color:var(--us); display:block; margin-bottom:.15rem; }
+  .trap{ background:var(--warn-soft); border-left:2px solid var(--warn); padding:.5rem .7rem; font-size:.83rem; color:var(--ink-2); }
+  .trap .ok{ font-family:var(--f-mono); font-size:.6rem; letter-spacing:.1em; text-transform:uppercase; color:var(--warn); display:block; margin-bottom:.15rem; }
+  .trap b{ color:var(--ink); }
+
+  .tw{ overflow-x:auto; border:1px solid var(--rule); background:var(--panel); margin-top:1.2rem; }
+  table{ border-collapse:collapse; width:100%; font-size:.83rem; line-height:1.7; min-width:640px; }
+  thead th{ text-align:left; font-family:var(--f-mono); font-size:.63rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); font-weight:600; padding:.6rem .75rem; border-bottom:1px solid var(--rule); white-space:nowrap; background:var(--panel-2); }
+  tbody td{ padding:.65rem .75rem; border-bottom:1px solid var(--rule-2); vertical-align:top; }
+  tbody tr:last-child td{ border-bottom:none; }
+  tbody tr:hover{ background:var(--panel-2); }
+  td.nm{ font-weight:600; white-space:nowrap; }
+  td.m{ color:var(--ink-2); }
+  td.num{ font-family:var(--f-mono); font-variant-numeric:tabular-nums; white-space:nowrap; color:var(--ink-2); }
+
+  /* report spec */
+  .rep{ border:1px solid var(--us); background:var(--panel); margin-top:1.2rem; }
+  .rep > header{ background:var(--us-soft); padding:.85rem 1.15rem; border-bottom:1px solid var(--us); }
+  .rep > header .k{ font-family:var(--f-mono); font-size:.63rem; letter-spacing:.13em; text-transform:uppercase; color:var(--us); display:block; }
+  .rep > header h3{ margin:.15rem 0 0; font-size:1.05rem; }
+  .rep ol{ list-style:none; counter-reset:rp; padding:1.1rem 1.15rem 1.2rem; display:flex; flex-direction:column; gap:.7rem; }
+  .rep li{ counter-increment:rp; display:grid; grid-template-columns:1.7rem minmax(0,1fr); column-gap:.7rem; row-gap:.1rem; align-items:baseline; }
+  .rep li::before{ content:counter(rp); font-family:var(--f-mono); font-size:.72rem; color:var(--us); grid-column:1; grid-row:1; }
+  .rep .h{ grid-column:2; font-weight:600; font-size:.9rem; display:block; }
+  .rep .d{ grid-column:2; font-size:.83rem; color:var(--ink-2); line-height:1.75; display:block; }
+
+  /* case study */
+  .case{ border:1px solid var(--rule); background:var(--panel); margin-top:1.2rem; }
+  .case.risk-hi{ border-color:var(--warn); }
+  .case.risk-lo{ border-color:var(--us); }
+  .case > header{ padding:.85rem 1.15rem; border-bottom:1px solid var(--rule); display:flex; flex-wrap:wrap; gap:.6rem; align-items:baseline; justify-content:space-between; }
+  .case.risk-hi > header{ background:var(--warn-soft); border-bottom-color:var(--warn); }
+  .case.risk-lo > header{ background:var(--us-soft); border-bottom-color:var(--us); }
+  .case > header .k{ font-family:var(--f-mono); font-size:.63rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); display:block; }
+  .case > header h3{ margin:.15rem 0 0; font-size:1rem; }
+  .case > header .rk{ font-family:var(--f-mono); font-size:.68rem; letter-spacing:.06em; padding:.2rem .55rem; white-space:nowrap; }
+  .case.risk-hi .rk{ background:var(--warn); color:var(--panel); }
+  .case.risk-lo .rk{ background:var(--us); color:var(--panel); }
+  .case-b{ padding:1.05rem 1.15rem 1.2rem; display:flex; flex-direction:column; gap:.85rem; }
+  .quotes{ list-style:none; display:flex; flex-direction:column; gap:.35rem; }
+  .quotes li{ font-size:.86rem; padding:.5rem .75rem; background:var(--panel-2); border-left:3px solid var(--warn); color:var(--ink); }
+  .case.risk-lo .quotes li{ border-left-color:var(--us); }
+  .actions{ list-style:none; counter-reset:ac; display:flex; flex-direction:column; gap:.5rem; }
+  .actions li{ counter-increment:ac; position:relative; padding-left:1.7rem; font-size:.86rem; color:var(--ink-2); line-height:1.8; }
+  .actions li::before{ content:counter(ac); position:absolute; left:0; top:.1rem; font-family:var(--f-mono); font-size:.72rem; color:var(--ink-3); }
+  .actions b{ color:var(--ink); }
+
+  .flowstage{ display:flex; flex-direction:column; gap:.4rem; }
+  .flowstage .fs-k{ font-family:var(--f-mono); font-size:.62rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); }
+  .case.risk-lo .flowstage .fs-k{ color:var(--us); }
+  .case.risk-hi .flowstage .fs-k{ color:var(--warn); }
+  .flowstage p{ margin:0; font-size:.87rem; color:var(--ink-2); max-width:none; line-height:1.85; }
+  .flowstage p b{ color:var(--ink); }
+  .rpt{ list-style:none; display:flex; flex-direction:column; gap:.3rem; margin:0; padding:0; }
+  .rep .rpt li, .rep .quotes li{ display:list-item; }
+  .rpt li{ font-size:.86rem; color:var(--ink-2); line-height:1.8; padding:.4rem .65rem; background:var(--panel-2); }
+  .rpt b{ color:var(--ink); }
+
+  footer{ margin-top:3.4rem; padding-top:1.3rem; border-top:1px solid var(--rule); }
+  footer p{ font-size:.76rem; color:var(--ink-3); line-height:1.85; max-width:var(--measure); }
+
+  @media (prefers-reduced-motion:reduce){ *,html{ transition:none!important; animation:none!important; scroll-behavior:auto!important; } }
+</style>
+
+<div class="doc">
+
+  <header class="mast">
+    <div class="meta"><span>受託実務フロー v1.0</span><span>2026年7月28日</span><span>問い合わせ〜上市〜継続運用</span></div>
+    <h1>問い合わせが1件来た。<br>そこから何をするか</h1>
+    <p class="sub">サイトを見た事業者から「この美顔器、医療機器にできますか」という問い合わせが入った——という前提で、上市までの実務を具体化します。<strong>凡例：</strong><span style="white-space:nowrap"><span class="lk lk-us" style="padding:.1rem .3rem;font-size:.62rem">当社</span> ／ <span class="lk lk-cl" style="padding:.1rem .3rem;font-size:.62rem">顧客</span> ／ <span class="lk lk-ex" style="padding:.1rem .3rem;font-size:.62rem">外部</span></span></p>
+  </header>
+
+  <!-- lead qualification -->
+  <section id="s-lead">
+    <div class="st"><span class="n">00</span><h2>問い合わせをしてくる人はどんな人か</h2></div>
+    <p class="lead">トップページのCTAは「URLを1つ、送ってください」という低いハードルです。<strong>ハードルを下げた分だけ、本気度もバラつきます。</strong>STEP 0（受付）で誰にどれだけ工数をかけるかを決めるために、来訪者を7種類に分けて整理します。</p>
+
+    <div class="tw">
+      <table>
+        <thead><tr><th>種類</th><th>特徴（どう言ってくるか）</th><th>見分けるサイン（STEP 0で）</th><th>転換可能性</th><th>対応方針</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="nm">① 困っている当事者<br><span style="font-weight:400;color:var(--ink-3);font-size:.78rem">Aさん型・本命</span></td>
+            <td class="m">すでに販売中の商品で、指摘・掲載停止・伸び悩みを経験している</td>
+            <td class="m">「訴求したい効能」欄が具体的に書かれている。URLが実在し、販売実績がある</td>
+            <td class="m"><b>高</b></td>
+            <td class="m">最優先。24時間以内の受付連絡を徹底する</td>
+          </tr>
+          <tr>
+            <td class="nm">② 乗り換え検討者<br><span style="font-weight:400;color:var(--us);font-size:.78rem">最も価値が高い</span></td>
+            <td class="m">既に管理医療機器として認証済みだが、今の製造販売元・受託先の対応に不満がある</td>
+            <td class="m">認証番号や現在の製造販売業者への言及がある。質問が「切り替えの手間」に集中する</td>
+            <td class="m"><b>非常に高い</b></td>
+            <td class="m"><b>該非判定が不要で、STEP1の大半を省略できる。</b>直接STEP2（受託審査）へ進める</td>
+          </tr>
+          <tr>
+            <td class="nm">③ 予防的に相談する堅実な事業者</td>
+            <td class="m">今は問題が起きていないが、他社の措置命令のニュース等を見て不安になった</td>
+            <td class="m">緊急性を示す言葉がない。「念のため」「他社の件を見て」という表現</td>
+            <td class="m">中〜高</td>
+            <td class="m">急がせない。<b>月額の広告表現チェック（顧問化）</b>を提案の軸にする</td>
+          </tr>
+          <tr>
+            <td class="nm">④ 準備段階の人</td>
+            <td class="m">これから商品化する個人・小規模事業者。「いま売っている商品」がまだない</td>
+            <td class="m">URL欄が空欄、または他社・海外の類似品のURLが貼られている</td>
+            <td class="m">低（いまは）</td>
+            <td class="m">STEP1を無理に回さない。<b>note記事等で関係を保ち、商品化後の再来訪を待つ</b></td>
+          </tr>
+          <tr>
+            <td class="nm">⑤ 社内稟議のための情報収集担当者</td>
+            <td class="m">ある程度の規模の企業の担当者で、決裁者に見せるための概算が欲しい</td>
+            <td class="m">肩書が「担当」「主任」等。「社内で検討する資料が欲しい」と明言する</td>
+            <td class="m">中<br><span style="font-size:.78rem;color:var(--ink-3)">決裁者次第</span></td>
+            <td class="m">STEP1の成果物「社内共有用の要約1枚」を必ず使わせる</td>
+          </tr>
+          <tr>
+            <td class="nm">⑥ 同業者・競合のリサーチ</td>
+            <td class="m">薬事コンサル、他の製造販売業者、EC制作会社が当社の立ち位置を確認しに来る</td>
+            <td class="m">会社名・肩書が同業種。質問が製品ではなく「体制」「料金の仕組み」に集中する</td>
+            <td class="m">低</td>
+            <td class="m">無下にしない。ただしSTEP1の工数はかけない。<b>提携の芽になることもある</b></td>
+          </tr>
+          <tr>
+            <td class="nm">⑦ 冷やかし・スパム・逆営業</td>
+            <td class="m">「無償」という言葉だけに反応。SEO・広告代理店等からの営業メール</td>
+            <td class="m">URLが商品ページでない（自社サイトトップ等）。必須項目が空欄</td>
+            <td class="m">ほぼゼロ</td>
+            <td class="m">STEP0の自動返信のみで完結させる。人の工数をかけない</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-us">
+      <span class="t">ヒアリングシートに1問足すだけで、②が見分けられる</span>
+      <p>現行のヒアリングシートには「作用の原理」「訴求したい効能」「年間の出荷数」はありますが、<b>「すでに認証をお持ちですか／現在の製造販売業者はどちらですか」という設問がありません。</b>②（乗り換え検討者）は該非判定そのものが不要で、STEP1の大半を飛ばして直接STEP2に進める、最も速く成約する相手です。<b>この1問を足すだけで、STEP 0の受付連絡の時点で①②とそれ以外を分けられます。</b></p>
+    </div>
+
+    <div class="box box-warn">
+      <span class="t">問い合わせ数を増やすより、STEP 0で見分ける方を優先する</span>
+      <p>トップページのCTAをこれ以上下げても、増えるのは主に④⑥⑦です。<b>STEP1（該非判定・初期診断）は無償かつ人の工数がかかる工程なので、見分けずに全件同じ深さで対応すると、①②に割ける時間が減ります。</b>受付の24時間以内に「訴求したい効能」欄と「認証の有無」欄を見るだけで、優先順位はほぼ決められます。</p>
+    </div>
+
+  </section>
+
+  <!-- 00 -->
+  <section id="s0">
+    <div class="st"><span class="n">01</span><h2>全体像 ― 判定が5つに分かれる</h2></div>
+    <p class="lead">最初の該非判定でどこに落ちるかによって、その後の期間・費用・そもそも受けるかどうかが全部変わります。<strong>ここを外すと事業が壊れます。</strong></p>
+
+    <div class="fork">
+      <div class="fk">
+        <div class="fk-h"><span class="lt lt-a">判定 A</span><h3>雑貨のままでよい</h3></div>
+        <div class="fk-b"><p>物理的な作用が弱い、または顧客が本当に言いたいことが化粧品・雑貨の範囲で足りるケース。<b>医療機器化を勧めない判断も、我々の仕事です。</b>表現の修正だけで解決するなら、そう伝える。</p></div>
+        <dl class="fk-n">
+          <div class="r"><dt>期間</dt><dd>—</dd></div>
+          <div class="r"><dt>審査費</dt><dd>—</dd></div>
+          <div class="r"><dt>収益</dt><dd>診断／顧問</dd></div>
+        </dl>
+      </div>
+
+      <div class="fk">
+        <div class="fk-h"><span class="lt lt-b">判定 B</span><h3>一般医療機器（クラスI）</h3></div>
+        <div class="fk-b"><p>製造販売届出のみ。<b>審査がなく、届け出た時点で販売できます。</b>着圧・サポーター・温灸器など。<b>最も速く、最も成約しやすい。1件目はここから取るべきです。</b></p></div>
+        <dl class="fk-n">
+          <div class="r"><dt>期間</dt><dd>届出時点</dd></div>
+          <div class="r"><dt>審査費</dt><dd>無料</dd></div>
+          <div class="r"><dt>収益</dt><dd>受託＋月額</dd></div>
+        </dl>
+      </div>
+
+      <div class="fk">
+        <div class="fk-h"><span class="lt lt-c">判定 C</span><h3>管理医療機器（クラスII）<br>認証基準あり</h3></div>
+        <div class="fk-b"><p>登録認証機関へ認証申請。<b>本命の帯です。</b>磁気治療器、家庭用電気マッサージ器、低周波治療器など、美容健康機器の主要カテゴリがここに入ります。<b>リフレソールもこのルートで取得しています。</b></p></div>
+        <dl class="fk-n">
+          <div class="r"><dt>期間</dt><dd>約2〜3か月</dd></div>
+          <div class="r"><dt>審査費</dt><dd>約40〜90万円</dd></div>
+          <div class="r"><dt>収益</dt><dd>認証支援＋受託</dd></div>
+        </dl>
+      </div>
+
+      <div class="fk">
+        <div class="fk-h"><span class="lt lt-d">判定 D</span><h3>管理医療機器（クラスII）<br>認証基準なし</h3></div>
+        <div class="fk-b"><p><b>PMDAへの承認申請</b>になります。クラスIIでも認証基準のない一般的名称が400以上あり、その場合は審査の深度が桁違いです。<b>ほとんどの中小事業者には現実的でない。</b>正直に伝えて、仕様変更で判定Cに寄せられないかを一緒に探すのが誠実な対応です。</p></div>
+        <dl class="fk-n">
+          <div class="r"><dt>期間</dt><dd>約6〜12か月</dd></div>
+          <div class="r"><dt>審査費</dt><dd>約50〜1,800万円</dd></div>
+          <div class="r"><dt>収益</dt><dd>要慎重判断</dd></div>
+        </dl>
+      </div>
+
+      <div class="fk">
+        <div class="fk-h"><span class="lt lt-e">判定 E</span><h3>高度管理医療機器（クラスIII・IV）</h3></div>
+        <div class="fk-b"><p><b>お断りします。</b>第一種医療機器製造販売業許可が必要で、当社の許可では扱えません。<b>断る理由を明確に伝え、可能なら他社を紹介する。</b>ここで無理に受けると事業が終わります。</p></div>
+        <dl class="fk-n">
+          <div class="r"><dt>期間</dt><dd>—</dd></div>
+          <div class="r"><dt>審査費</dt><dd>—</dd></div>
+          <div class="r"><dt>収益</dt><dd>なし</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="box box-warn">
+      <span class="t">最も重要な分岐は C と D の間にある</span>
+      <p>同じ「クラスII」でも、<b>認証基準があれば約40〜90万円・2〜3か月、なければ約50〜1,800万円・6〜12か月</b>。顧客に最初の見立てを伝える前に、<b>必ず認証基準の有無まで確認してください。</b>「クラスIIですね、認証を取りましょう」と言った後で承認ルートだったと分かるのが、この事業で最悪の事故です。</p>
+    </div>
+  </section>
+
+  <!-- STEP 0 -->
+  <section id="s1">
+    <div class="st"><span class="n">02</span><h2>ステップ別の実務</h2></div>
+
+    <div class="flow">
+
+      <!-- 0 -->
+      <div class="sp">
+        <div class="sp-h"><span class="num">STEP 0</span><h3>受付</h3><span class="dur">24時間以内</span><span class="fee">無償</span></div>
+        <div class="sp-b">
+          <div class="lane"><span class="lk lk-us">当社</span><span class="lv">受領の連絡を返し、<b>ヒアリングシートを送る。</b>「担当より追ってご連絡します」で止めない——熱があるうちに具体的な情報依頼まで進める</span></div>
+          <div class="lane"><span class="lk lk-cl">顧客</span><span class="lv">以下を提出する<ul><li>製品の写真、構造図、取扱説明書</li><li><b>作用の原理</b>（磁気／低周波／温熱／振動／超音波／光のいずれか、出力値）</li><li>接触する素材</li><li>現在の販売ページURL、商品名、広告文</li><li><b>訴求したい効能</b>（これが判定の起点になる）</li><li>製造所（国内／海外、工場名と所在地）</li><li>年間の出荷見込み数</li></ul></span></div>
+          <div class="out"><span class="ok">成果物</span>ヒアリングシート（回答済み）</div>
+          <div class="trap"><span class="ok">落とし穴</span><b>「作用の原理」を顧客が答えられないことが多い。</b>OEM工場に聞かないと分からないケースが大半なので、<b>最初から「工場に確認してください」と伝えておく。</b>ここで2週間失う</div>
+        </div>
+      </div>
+
+      <!-- 1 -->
+      <div class="sp">
+        <div class="sp-h"><span class="num">STEP 1</span><h3>該非判定・初期診断</h3><span class="dur">1〜2週間</span><span class="fee">無償（初回）</span></div>
+        <div class="sp-b">
+          <div class="lane"><span class="lk lk-us">当社</span><span class="lv"><b>ここが商品の本体です。</b>順に処理する<ul><li>作用の原理から医療機器該当性を判断する</li><li>顧客が訴求したい効能を、法令上の「使用目的」の言葉に翻訳する</li><li><b>PMDAの医療機器基準データベースで一般的名称（JMDN）を検索</b></li><li>クラス分類を確定する</li><li><b>認証基準の有無を確認する</b>（判定CとDの分岐）</li><li>現在の商品名・広告文の薬機法上のリスクを洗い出す</li><li>必要な試験項目を概算する</li></ul></span></div>
+          <div class="lane"><span class="lk lk-cl">顧客</span><span class="lv">追加質問への回答。工場への確認</span></div>
+          <div class="rev"><span class="ok">当社の収益</span>初回は無償。2製品目以降、または継続的な広告チェックから有償（顧問化）</div>
+          <div class="trap"><span class="ok">落とし穴</span>「現状のリスク」だけ伝えて終わると、顧客は不安になるだけで動きません。<b>必ず「認証を取った場合に表示できる文言」まで書く。</b>それが提案です</div>
+        </div>
+      </div>
+
+      <!-- diag report spec -->
+      <div class="sp" style="grid-template-columns:1fr">
+        <div class="rep">
+          <header><span class="k">STEP 1 の成果物</span><h3>診断レポートの構成（これが最初の商品）</h3></header>
+          <ol>
+            <li><span class="h">現在の区分</span><span class="d">この製品はいま雑貨として販売されている、という事実確認</span></li>
+            <li><span class="h">現在の表示に含まれるリスク</span><span class="d">商品名・広告文の中で、医療機器でなければ使えない表現を具体的に列挙する。<b>指摘ではなく事実の提示にとどめる</b></span></li>
+            <li><span class="h">該当しうる一般的名称とクラス分類</span><span class="d">JMDNコードと名称、クラス、<b>認証基準の有無</b></span></li>
+            <li><span class="h">医療機器化した場合に表示できる効能</span><span class="d"><b>ここが提案の核心。</b>実際に承認・認証されている機器の使用目的を引用して示す</span></li>
+            <li><span class="h">必要な手続きと試験</span><span class="d">届出／認証／承認のどれか。想定される試験項目</span></li>
+            <li><span class="h">概算費用と期間</span><span class="d">審査費用、試験費用、当社の費用を分けて提示する。<b>桁を示すことで判断を止めない</b></span></li>
+            <li><span class="h">推奨する進め方</span><span class="d">今すぐ着手／仕様を変えてから／医療機器化しない、のいずれかを明確に推奨する</span></li>
+            <li><span class="h">社内共有用の要約1枚</span><span class="d"><b>担当者が決裁者に見せるためのもの。</b>費用・期間・書けるようになる文言・先行事例を1枚に</span></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- STEP 1 production method -->
+      <div class="sp" style="grid-template-columns:1fr">
+        <div class="rep">
+          <header><span class="k">STEP 1 の生産方式 ／ 2026年7月30日 実地検証済み</span><h3>AIによる下書き＋人間の最終確認</h3></header>
+          <ol>
+            <li><span class="h">下書きはAIに作らせる</span><span class="d">商品URLを渡すと、ページを読み、PMDAの認証基準や薬機法の判断基準をその場で検索し、<b>診断レポートの1〜7を数分で下書きできる。</b>実際にQoo10・Amazonの実在商品で試し、妥当な下書きが出ることを確認済み</span></li>
+            <li><span class="h">商品画像は別工程でダウンロードして読ませる</span><span class="d"><b>ページのテキスト読み取りだけでは、画像に埋め込まれた効能訴求・注記（「※個人差があります」等の弁明文言を含む）を見落とす。</b>これが最大の見落としどころだった。画像をダウンロードしてAIに読ませる工程を、テキスト読み取りとは別に必ず入れる</span></li>
+            <li><span class="h">AIの判定はそのまま顧客に送らない</span><span class="d">AIが検索して見つける業界の判断基準（構造ではなく標榜する効能で決まる、等）は妥当な出発点になるが、<b>一般的名称・クラス分類の最終確定は薬事担当が行う。</b>ここを飛ばした運用は事故のもとになる</span></li>
+            <li><span class="h">結果として、STEP 1の所要期間を「1〜2週間」から縮められる</span><span class="d">下書きが数分で出ることで、薬事担当の作業は「ゼロから調べる」ではなく「下書きを検証する」に変わる。<b>ヒアリングシート回収の待ち時間の方がボトルネックになる可能性が高い</b></span></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- STEP 1 worked example -->
+      <div class="sp" style="grid-template-columns:1fr">
+        <div class="rep">
+          <header><span class="k">STEP 1 の実例</span><h3>2件を「判定 → 診断レポート下書き → 人間の確認」の流れで見る</h3></header>
+          <div style="padding:0 1.15rem 1.2rem">
+            <p style="font-size:.86rem;color:var(--ink-2);line-height:1.85;max-width:none;margin:0 0 1rem">実在する美顔器2商品のURLで、受領から診断レポートの下書きまでを具体的に示します。<b>2件とも①（困っている当事者）に分類されます。</b>ただし、①の中でも緊急度がまったく違う実例になっているので、その違いを示します。</p>
+
+            <div class="case risk-lo">
+              <header>
+                <div><span class="k">ケース①</span><h3>メディキューブ ブースタープロX2（EMS／微細電流／LED・35,000円）</h3></div>
+                <span class="rk">緊急度：低</span>
+              </header>
+              <div class="case-b">
+
+                <div class="flowstage">
+                  <span class="fs-k">① 判定</span>
+                  <p>全モードの効能表示が「肌<b>印象</b>をサポートします」に統一され、「※個人差があります」の注記もある。EMSモードには<b>「モード名称であり、効能・効果を示すものではありません」</b>という自主的な断り書きまで入っている。<b>すでに薬事対策済みと見られ、医療機器化を勧める理由が薄い。</b></p>
+                </div>
+
+                <div class="flowstage">
+                  <span class="fs-k">② 診断レポート下書き ／ AIが数分で作成</span>
+                  <ul class="rpt">
+                    <li><b>現在の区分</b>：雑貨（美容家電）として販売中</li>
+                    <li><b>リスク</b>：低。効能表現はすべて「印象のサポート」にとどまり、医療機器的な断定表現は見当たらない</li>
+                    <li><b>推奨</b>：医療機器化は不要。現状の表現を維持したうえで、広告表現の月次チェック（顧問契約）を案内する</li>
+                  </ul>
+                </div>
+
+                <div class="flowstage">
+                  <span class="fs-k">③ 薬事担当の確認・送付</span>
+                  <p>先に<b>ヒアリングシートの「訴求したい効能」欄</b>を見る。「血行」「痛みの緩和」など医療機器でなければ書けない言葉を本当に書きたいのかを確認したうえで、AIの下書きどおり<b>「現状のままで問題ない」と正直に伝える。</b>ビフォーアフター画像（アプリ機能紹介）だけは景表法の観点で参考情報として一言添える。<b>STEP1は1往復で終える。</b></p>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="case risk-hi">
+              <header>
+                <div><span class="k">ケース②</span><h3>FUIAD 目元美顔器（音波振動／温熱40〜45℃／LED・1,199円）</h3></div>
+                <span class="rk">緊急度：高</span>
+              </header>
+              <div class="case-b">
+
+                <div class="flowstage">
+                  <span class="fs-k">① 判定</span>
+                  <p>商品説明とブランド紹介文に、<b>医療機器でなければ使用できない表現がそのまま使われている。</b></p>
+                  <ul class="quotes">
+                    <li>「目のかゆみ・痛みや、まぶたの乾燥・たるみ・くまなどの目元の肌悩みを<b>軽減する</b>ために設計された」</li>
+                    <li>「<b>血行促進</b>と新陳代謝を高め」（ブランド紹介文）</li>
+                    <li>「定期的な使用でくまや目元の肌悩みを<b>薄くします</b>」</li>
+                    <li>自称「<b>肌改善機</b>」</li>
+                  </ul>
+                  <p>出品者はAmazonのマーケットプレイス業者（hswl-jp）、ブランドはFUIAD（中国）、レビュー33件・カテゴリ順位115位。<b>中小・海外OEM系の典型的なプロフィール。</b></p>
+                </div>
+
+                <div class="flowstage">
+                  <span class="fs-k">② 診断レポート下書き ／ AIが数分で作成</span>
+                  <ul class="rpt">
+                    <li><b>現在の区分</b>：雑貨として販売中だが、<b>医療機器でなければ使えない表現を複数使用</b></li>
+                    <li><b>リスク</b>：高。「血行促進」「軽減する」「肌改善機」は医療機器の効能効果に相当する表現</li>
+                    <li><b>該当しうる一般的名称</b>：音波振動・温熱を主たる作用とする機器のため、<b>家庭用低周波治療器ではなく別の一般的名称になる可能性が高い（要実検索）</b></li>
+                    <li><b>推奨</b>：医療機器化の検討と並行して、<b>雑貨のまま表現だけを即時に修正する応急処置</b>を提案する</li>
+                  </ul>
+                </div>
+
+                <div class="flowstage">
+                  <span class="fs-k">③ 薬事担当の確認・送付</span>
+                  <p><b>最優先で連絡する（受付24時間以内）。</b>「血行促進」「軽減する」「肌改善機」の3語は断定ではなく<b>事実として指摘する</b>（診断レポート雛形02章と同じ書き方）。PMDAの医療機器基準データベースで一般的名称を<b>実際に検索して確定</b>し、認証基準の有無を確認したうえで費用感を伝える。製造元が中国メーカーである点から、<b>外国製造業者登録に協力してもらえるかを最初の関門として案内する。</b></p>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="box box-warn" style="margin-top:1.2rem">
+              <span class="t">同じ「美顔器」というジャンルでも、①の判定でここまで変わる</span>
+              <p>分かれ目は製品の複雑さではなく、<b>「訴求文言に、医療機器でなければ使えない言葉がそのまま出ているかどうか」の1点</b>です。AIが数分で作る下書きの精度は、①判定の材料（商品ページのテキストと画像）を漏れなく読ませられるかで決まります。<b>人間が最終確認で見るべきは、下書きの「事実の指摘」部分が正確か、そして一般的名称の確定だけです。</b></p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="sp">
+        <div class="sp-h"><span class="num">STEP 2</span><h3>受託審査・見積</h3><span class="dur">2〜4週間</span><span class="fee">無償</span></div>
+        <div class="sp-b">
+          <div class="lane"><span class="lk lk-us">当社</span><span class="lv">引き受けてよい案件かを審査する<ul><li><b>製造所の状況確認</b>——国内なら医療機器製造業の登録の有無、海外なら<b>外国製造業者の登録</b>が可能か</li><li>技術文書が日本語または英語で提供されるか</li><li>重大なリコール履歴・係争の有無</li><li>反社チェック、与信</li><li>年間出荷量から従量料金を設計</li></ul></span></div>
+          <div class="lane"><span class="lk lk-cl">顧客</span><span class="lv">工場との調整。技術文書の入手。<b>ここで工場が非協力的だと案件が止まる</b></span></div>
+          <div class="out"><span class="ok">成果物</span>受託可否の判断／見積書（初期・月額・従量・スポットの4層）</div>
+          <div class="trap"><span class="ok">落とし穴</span><b>中国・韓国のOEM工場が外国製造業者登録に協力しないケースが頻発します。</b>工場からすれば手間が増えるだけだからです。<b>STEP 1の段階で「工場の協力が必須」と伝え、早めに感触を取ること</b></div>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="sp">
+        <div class="sp-h"><span class="num">STEP 3</span><h3>契約</h3><span class="dur">1〜2週間</span><span class="fee">初期費用の入金</span></div>
+        <div class="sp-b">
+          <div class="lane"><span class="lk lk-us">当社</span><span class="lv">4つの文書を締結する<ul><li><b>製造販売受託契約</b>（顧客と当社）——役割分担、費用、<b>認証の帰属</b>、最低契約期間、解約条件</li><li><b>製造委託契約</b>（当社と製造所）</li><li><b>品質に関する取決め書</b>（QMS省令上、製造所との間で必須）</li><li><b>安全管理に関する取決め</b>（GVP省令）</li></ul></span></div>
+          <div class="lane"><span class="lk lk-cl">顧客</span><span class="lv">締結。工場との三者調整</span></div>
+          <div class="rev"><span class="ok">当社の収益</span><b>初期費用をここで受け取る。</b>以降の工数を先に回収する設計にしておく</div>
+          <div class="trap"><span class="ok">落とし穴</span><b>認証の帰属を曖昧にしたまま進めない。</b>認証の名義は製造販売業者である当社になりますが、契約終了時にどうするかを書いておかないと、後で必ず揉めます。顧客が最も気にする条項でもあります</div>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="sp">
+        <div class="sp-h"><span class="num">STEP 4</span><h3>技術文書と試験</h3><span class="dur">1〜4か月</span><span class="fee">試験費用（実費）</span></div>
+        <div class="sp-b">
+          <div class="lane"><span class="lk lk-us">当社</span><span class="lv"><ul><li>基本要件基準への適合性を整理する</li><li>技術文書（設計・製造・性能・安全性）をまとめる</li><li><b>添付文書を作成する</b></li><li><b>法定表示を設計する</b>——製造販売業者名は当社になる。パッケージの改版が必要</li><li>試験機関の選定と手配</li></ul></span></div>
+          <div class="lane"><span class="lk lk-ex">外部</span><span class="lv">試験機関が実施する<ul><li>電気安全（電気を使う機器の場合）</li><li>EMC（電磁両立性）</li><li><b>生物学的安全性</b>（皮膚に触れる機器は必須）</li><li>性能試験（磁束密度、出力など認証基準の規定値）</li></ul></span></div>
+          <div class="lane"><span class="lk lk-cl">顧客</span><span class="lv">試験用サンプルの提供。仕様に関する工場からの回答。<b>パッケージ改版の実務</b></span></div>
+          <div class="trap"><span class="ok">落とし穴</span><b>ここが最も時間が読めない工程です。</b>試験で規格を満たさず仕様変更→再試験になると数か月飛びます。<b>顧客には最初から「試験は一発で通らないことがある」と伝えておく。</b>言っていないと信頼を失います</div>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="sp">
+        <div class="sp-h"><span class="num">STEP 5</span><h3>申請・審査</h3><span class="dur">クラスI：即時／クラスII：2〜3か月</span><span class="fee">審査費用</span></div>
+        <div class="sp-b">
+          <div class="lane"><span class="lk lk-us">当社</span><span class="lv"><b>判定Bの場合</b>——製造販売届書を提出する。<b>届け出た時点で販売可能</b>になる<br><br><b>判定Cの場合</b>——登録認証機関を選定し、認証申請と<b>QMS適合性調査</b>を申請する。照会事項に回答する</span></div>
+          <div class="lane"><span class="lk lk-ex">外部</span><span class="lv">登録認証機関が審査と<b>製造所のQMS適合性調査</b>を行う。実地調査になる場合は工場の受入対応が必要</span></div>
+          <div class="lane"><span class="lk lk-cl">顧客</span><span class="lv">工場との調整。<b>この期間は顧客側の作業がほぼなく、不安が最も高まる</b></span></div>
+          <div class="rev"><span class="ok">当社の収益</span>認証支援のスポット費用。<b>着手時と取得時の分割にすると資金繰りが安定する</b></div>
+          <div class="trap"><span class="ok">落とし穴</span><b>沈黙が最大のリスクです。</b>審査待ちで動きがなくても、隔週で「今週は審査中で動きなし」と報告する。<b>この期間に次のSTEP 6の準備を進めれば、待ち時間が準備期間に変わります</b></div>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="sp">
+        <div class="sp-h"><span class="num">STEP 6</span><h3>上市準備</h3><span class="dur">1〜2か月（STEP 5と並行）</span><span class="fee">—</span></div>
+        <div class="sp-b">
+          <div class="lane"><span class="lk lk-us">当社</span><span class="lv"><ul><li>パッケージの法定表示を最終確認する</li><li>添付文書を公表する</li><li><b>LP・広告・モール掲載の改訂案をチェックする</b>——認証された範囲内に収まっているか</li><li>顧客が自ら販売する場合、<b>管理医療機器の販売業届出</b>（営業所ごと）を案内する</li><li>出荷判定の手順を確立する</li></ul></span></div>
+          <div class="lane"><span class="lk lk-cl">顧客</span><span class="lv">パッケージ・LP・広告・モール掲載の全面改訂。<b>ここで実務が集中し、相談が増える</b></span></div>
+          <div class="rev"><span class="ok">当社の収益</span><b>表示・広告チェックが継続収益になる起点。</b>ここから顧問契約に移行させる</div>
+          <div class="trap"><span class="ok">落とし穴</span><b>顧客が喜んで過剰表現に走ります。</b>2025年11月に薬機法初の措置命令を受けた事業者は、認証されていない効能をうたった医療機器の販売者でした。<b>名宛人は製造販売元である当社になります。</b>チェックを工程として義務化してください</div>
+        </div>
+      </div>
+
+      <!-- 7 -->
+      <div class="sp">
+        <div class="sp-h"><span class="num">STEP 7</span><h3>出荷開始・継続運用</h3><span class="dur">継続</span><span class="fee">月額＋従量</span></div>
+        <div class="sp-b">
+          <div class="lane"><span class="lk lk-us">当社</span><span class="lv"><ul><li><b>ロットごとの出荷判定</b>と記録の保管</li><li>不具合情報の収集・評価・報告</li><li>広告表現の継続チェック</li><li>製造所の管理監督</li><li>認証内容の変更手続き、許可の更新管理</li></ul></span></div>
+          <div class="lane"><span class="lk lk-cl">顧客</span><span class="lv">出荷計画の共有。市場からの苦情・不具合情報の連携。<b>これは契約上の義務にしておく</b></span></div>
+          <div class="rev"><span class="ok">当社の収益</span><b>月額管理料＋出荷従量。</b>ここが本体。2製品目、そして<b>専用ジェル等の化粧品</b>へ拡張する</div>
+          <div class="trap"><span class="ok">落とし穴</span>顧客が不具合情報を上げてこないと、当社が報告義務を果たせません。<b>契約に情報連携義務を明記し、定例の連絡を運用として決めること</b></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section id="s2">
+    <div class="st"><span class="n">03</span><h2>時間と費用の見取り図</h2></div>
+    <div class="tw">
+      <table>
+        <thead><tr><th>ルート</th><th>STEP 0〜3</th><th>STEP 4 試験</th><th>STEP 5 審査</th><th>合計の目安</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="nm">判定B<br>クラスI 届出</td>
+            <td class="num">1〜2か月</td>
+            <td class="num">試験は軽微</td>
+            <td class="num">届出＝即日<br>審査費 無料</td>
+            <td class="num"><b>2〜4か月</b></td>
+          </tr>
+          <tr>
+            <td class="nm">判定C<br>クラスII 認証</td>
+            <td class="num">1〜2か月</td>
+            <td class="num">1〜4か月<br>試験費は実費</td>
+            <td class="num">2〜3か月<br>約40〜90万円</td>
+            <td class="num"><b>6〜9か月</b></td>
+          </tr>
+          <tr>
+            <td class="nm">判定D<br>クラスII 承認</td>
+            <td class="num">1〜2か月</td>
+            <td class="num">数か月〜</td>
+            <td class="num">6〜12か月<br>約50〜1,800万円</td>
+            <td class="num"><b>1年以上</b></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="box box-key">
+      <span class="t">数字の扱い</span>
+      <p>上記の審査費用は<b>申請手数料であって、試験費用と当社の費用は含みません。</b>顧客に提示するときは必ず3つを分けてください。合算した総額だけを見せると、内訳の交渉ができなくなります。</p>
+      <p>そして<b>判定Bの「2〜4か月・審査費無料」は圧倒的な武器です。</b>1件目の実績は、必ずここから取ってください。<b>成功体験を早く作ることが、次のすべてにつながります。</b></p>
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section id="s3">
+    <div class="st"><span class="n">04</span><h2>役割の分界</h2></div>
+    <p class="lead">揉める原因はほぼ「誰がやるか決めていなかった」ことです。<strong>契約書に書く前提で整理します。</strong></p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>業務</th><th>当社</th><th>顧客</th><th>備考</th></tr></thead>
+        <tbody>
+          <tr><td class="nm">該非判定・区分の特定</td><td class="m">○</td><td class="m">情報提供</td><td class="m">当社の中核業務</td></tr>
+          <tr><td class="nm">技術文書の作成</td><td class="m">○（とりまとめ）</td><td class="m">工場から資料入手</td><td class="m"><b>元資料は工場にしかない</b></td></tr>
+          <tr><td class="nm">試験の手配</td><td class="m">○</td><td class="m">サンプル提供・費用負担</td><td class="m">費用は実費で顧客負担</td></tr>
+          <tr><td class="nm">申請・審査対応</td><td class="m">○</td><td class="m">—</td><td class="m">当社が申請者</td></tr>
+          <tr><td class="nm">外国製造業者登録</td><td class="m">○（支援）</td><td class="m">工場の同意取得</td><td class="m"><b>工場の協力が絶対条件</b></td></tr>
+          <tr><td class="nm">パッケージ・表示の制作</td><td class="m">仕様の指定・確認</td><td class="m">○（制作）</td><td class="m">法定表示の内容は当社が決める</td></tr>
+          <tr><td class="nm">広告・LPの制作</td><td class="m">確認・是正指示</td><td class="m">○（制作）</td><td class="m"><b>確認は当社の義務かつ収益源</b></td></tr>
+          <tr><td class="nm">出荷判定</td><td class="m">○</td><td class="m">—</td><td class="m">製造販売元の専権</td></tr>
+          <tr><td class="nm">在庫・物流・販売</td><td class="m">—</td><td class="m">○</td><td class="m"><b>当社は在庫を持たない</b></td></tr>
+          <tr><td class="nm">販売業届出</td><td class="m">案内</td><td class="m">○</td><td class="m">顧客が自ら販売する場合、営業所ごと</td></tr>
+          <tr><td class="nm">不具合情報の収集</td><td class="m">○（評価・報告）</td><td class="m">○（一次情報の連携）</td><td class="m"><b>契約に連携義務を明記</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section id="s4">
+    <div class="st"><span class="n">05</span><h2>案件が止まる5つの原因</h2></div>
+    <div class="tw">
+      <table>
+        <thead><tr><th>原因</th><th>発生する場所</th><th>先回りの手</th></tr></thead>
+        <tbody>
+          <tr><td class="nm">作用の原理が分からない</td><td class="m">STEP 0</td><td class="m">受付時点で「工場に確認が必要です」と伝え、依頼を並行させる</td></tr>
+          <tr><td class="nm">認証基準がなく承認ルートだった</td><td class="m">STEP 1</td><td class="m"><b>見立てを伝える前に必ず認証基準の有無まで確認する。</b>仕様変更で認証ルートに寄せられないかも同時に検討する</td></tr>
+          <tr><td class="nm">工場が外国製造業者登録に非協力</td><td class="m">STEP 2</td><td class="m">STEP 1の段階で工場の感触を取る。<b>協力が得られない場合は国内製造所への切替を提案する</b></td></tr>
+          <tr><td class="nm">社内稟議で止まる</td><td class="m">STEP 1〜2</td><td class="m">診断レポートに<b>社内共有用の要約1枚</b>を必ず同梱する</td></tr>
+          <tr><td class="nm">試験が通らず再試験</td><td class="m">STEP 4</td><td class="m"><b>最初から「一発で通らないことがある」と伝えておく。</b>試験費用の追加が発生しうる旨を契約に入れる</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-us">
+      <span class="t">1件目に何を選ぶか</span>
+      <p>この5つを踏まえると、<b>1件目に選ぶべき案件の条件</b>が決まります。<b>①クラスIで届出のみ ②国内製造 ③既にEC実績があり出荷量が読める ④担当者に決裁権がある。</b>この4条件を満たす案件を最優先で探してください。</p>
+      <p>抽出済み27社のうち<b>着圧ソックス系</b>がこの条件に最も近い。届出だけで「医療用」を正規に名乗れるようになり、同じ検索結果に届出済みの競合が並んでいるため説明も要りません。<b>最短で成功体験を作れる案件です。</b></p>
+    </div>
+  </section>
+
+  <footer>
+    <p>本フローに記載の期間・費用は2026年7月28日時点の公開情報に基づく目安です。承認申請 約50〜1,800万円・約6〜12か月、認証申請 約40〜90万円・約2〜3か月、製造販売届出 無料・届出時点で販売可能、という区分は一般社団法人の公表するFAQに基づいており、実際の金額は申請区分・一般的名称・試験項目により大きく変動します。個別案件では必ずPMDAの医療機器基準データベースで一般的名称と認証基準の有無を確認し、登録認証機関および試験機関に見積を取得してください。</p>
+  </footer>
+
+</div>
