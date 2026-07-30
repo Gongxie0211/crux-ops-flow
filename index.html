@@ -177,6 +177,26 @@
   .rpt li{ font-size:.86rem; color:var(--ink-2); line-height:1.8; padding:.4rem .65rem; background:var(--panel-2); }
   .rpt b{ color:var(--ink); }
 
+  /* flowmap */
+  .flowmap{ display:flex; flex-direction:column; gap:0; margin-top:1.5rem; }
+  .fm-node{ display:block; text-decoration:none; border:1px solid var(--rule); background:var(--panel); padding:.7rem 1rem; text-align:center; color:var(--ink); font-weight:600; font-size:.88rem; }
+  .fm-node:hover{ border-color:var(--us); background:var(--us-soft); }
+  .fm-node .fm-sub{ display:block; font-family:var(--f-mono); font-weight:400; font-size:.66rem; color:var(--ink-3); margin-top:.2rem; }
+  .fm-node:hover .fm-sub{ color:var(--us); }
+  .fm-arrow{ text-align:center; font-family:var(--f-mono); font-size:.72rem; color:var(--ink-3); padding:.35rem 0; line-height:1.6; }
+  .fm-arrow a{ color:var(--us); }
+  .fm-branch-wrap{ border:1px dashed var(--rule); background:var(--panel-2); padding:.9rem .9rem 1rem; margin:.15rem 0; }
+  .fm-branch-label{ display:block; text-align:center; margin-bottom:.65rem; }
+  .fm-branch-label a{ font-family:var(--f-mono); font-size:.66rem; letter-spacing:.08em; color:var(--ink-3); text-decoration:none; }
+  .fm-branch-label a:hover{ color:var(--us); }
+  .fm-branches{ display:grid; grid-template-columns:1fr; gap:.5rem; }
+  @media (min-width:760px){ .fm-branches{ grid-template-columns:repeat(5,1fr); } }
+  .fm-b{ display:flex; flex-direction:column; gap:.3rem; text-decoration:none; padding:.6rem .65rem .7rem; font-size:.78rem; line-height:1.55; border:1px solid var(--rule); background:var(--panel); }
+  .fm-b:hover{ border-color:var(--ink); }
+  .fm-b .fm-lt{ font-family:var(--f-mono); font-size:.6rem; letter-spacing:.04em; padding:.1rem .4rem; align-self:flex-start; }
+  .fm-b .fm-t{ color:var(--ink); font-weight:600; }
+  .fm-b .fm-d{ color:var(--ink-3); font-size:.72rem; }
+
   footer{ margin-top:3.4rem; padding-top:1.3rem; border-top:1px solid var(--rule); }
   footer p{ font-size:.76rem; color:var(--ink-3); line-height:1.85; max-width:var(--measure); }
 
@@ -190,6 +210,44 @@
     <h1>問い合わせが1件来た。<br>そこから何をするか</h1>
     <p class="sub">サイトを見た事業者から「この美顔器、医療機器にできますか」という問い合わせが入った——という前提で、上市までの実務を具体化します。<strong>凡例：</strong><span style="white-space:nowrap"><span class="lk lk-us" style="padding:.1rem .3rem;font-size:.62rem">当社</span> ／ <span class="lk lk-cl" style="padding:.1rem .3rem;font-size:.62rem">顧客</span> ／ <span class="lk lk-ex" style="padding:.1rem .3rem;font-size:.62rem">外部</span></span></p>
   </header>
+
+  <section id="s-map" style="margin-top:2rem">
+    <div class="st"><span class="n">MAP</span><h2>全体の流れ</h2></div>
+    <p class="lead">問い合わせを受けてから出荷開始までの道筋です。<strong>各ボックスをクリックすると、該当する箇所に移動します。</strong></p>
+
+    <div class="flowmap">
+      <a class="fm-node" href="#s-lead">問い合わせ受信<span class="fm-sub">CV-01 ／ URLを1つ</span></a>
+      <div class="fm-arrow">↓</div>
+      <a class="fm-node" href="#step0">STEP 0　受付<span class="fm-sub">24時間以内・無償</span></a>
+      <div class="fm-arrow">↓　ここで <a href="hearing-sheet.html">ヒアリングシート</a> を送付し、回答を受け取る</div>
+      <a class="fm-node" href="#step1">STEP 1　該非判定・初期診断<span class="fm-sub">1〜2週間・無償（初回）</span></a>
+      <div class="fm-arrow">↓</div>
+
+      <div class="fm-branch-wrap">
+        <span class="fm-branch-label"><a href="#s0">判定 A〜E ／ ここで進む道が分かれる</a></span>
+        <div class="fm-branches">
+          <a class="fm-b" href="#s0"><span class="fm-lt lt-a">判定 A</span><span class="fm-t">雑貨のままでよい</span><span class="fm-d">→ 診断で終了・顧問提案</span></a>
+          <a class="fm-b" href="#step2"><span class="fm-lt lt-b">判定 B</span><span class="fm-t">クラスI</span><span class="fm-d">→ 届出即日・最速でSTEP2へ</span></a>
+          <a class="fm-b" href="#step2"><span class="fm-lt lt-c">判定 C</span><span class="fm-t">クラスII・基準あり</span><span class="fm-d">→ 本命ルート・STEP2〜7</span></a>
+          <a class="fm-b" href="#s0"><span class="fm-lt lt-d">判定 D</span><span class="fm-t">クラスII・基準なし</span><span class="fm-d">→ 要慎重判断・仕様変更を検討</span></a>
+          <a class="fm-b" href="#s0"><span class="fm-lt lt-e">判定 E</span><span class="fm-t">高度管理医療機器</span><span class="fm-d">→ お断り</span></a>
+        </div>
+      </div>
+
+      <div class="fm-arrow">↓　B・C はここで合流</div>
+      <a class="fm-node" href="#step2">STEP 2　受託審査・見積<span class="fm-sub">2〜4週間・無償</span></a>
+      <div class="fm-arrow">↓</div>
+      <a class="fm-node" href="#step3">STEP 3　契約<span class="fm-sub">1〜2週間・初期費用の入金</span></a>
+      <div class="fm-arrow">↓</div>
+      <a class="fm-node" href="#step4">STEP 4　技術文書と試験<span class="fm-sub">1〜4か月・試験費用（実費）</span></a>
+      <div class="fm-arrow">↓</div>
+      <a class="fm-node" href="#step5">STEP 5　申請・審査<span class="fm-sub">クラスI：即時／クラスII：2〜3か月</span></a>
+      <div class="fm-arrow">↓</div>
+      <a class="fm-node" href="#step6">STEP 6　上市準備<span class="fm-sub">1〜2か月（STEP5と並行）</span></a>
+      <div class="fm-arrow">↓</div>
+      <a class="fm-node" href="#step7">STEP 7　出荷開始・継続運用<span class="fm-sub">継続・月額＋従量</span></a>
+    </div>
+  </section>
 
   <!-- lead qualification -->
   <section id="s-lead">
@@ -330,7 +388,7 @@
     <div class="flow">
 
       <!-- 0 -->
-      <div class="sp">
+<div class="sp" id="step0">
         <div class="sp-h"><span class="num">STEP 0</span><h3>受付</h3><span class="dur">24時間以内</span><span class="fee">無償</span></div>
         <div class="sp-b">
           <div class="lane"><span class="lk lk-us">当社</span><span class="lv">受領の連絡を返し、<b>ヒアリングシートを送る。</b>「担当より追ってご連絡します」で止めない——熱があるうちに具体的な情報依頼まで進める</span></div>
@@ -341,7 +399,7 @@
       </div>
 
       <!-- 1 -->
-      <div class="sp">
+<div class="sp" id="step1">
         <div class="sp-h"><span class="num">STEP 1</span><h3>該非判定・初期診断</h3><span class="dur">1〜2週間</span><span class="fee">無償（初回）</span></div>
         <div class="sp-b">
           <div class="lane"><span class="lk lk-us">当社</span><span class="lv"><b>ここが商品の本体です。</b>順に処理する<ul><li>作用の原理から医療機器該当性を判断する</li><li>顧客が訴求したい効能を、法令上の「使用目的」の言葉に翻訳する</li><li><b>PMDAの医療機器基準データベースで一般的名称（JMDN）を検索</b></li><li>クラス分類を確定する</li><li><b>認証基準の有無を確認する</b>（判定CとDの分岐）</li><li>現在の商品名・広告文の薬機法上のリスクを洗い出す</li><li>必要な試験項目を概算する</li></ul></span></div>
@@ -464,7 +522,7 @@
       </div>
 
       <!-- 2 -->
-      <div class="sp">
+<div class="sp" id="step2">
         <div class="sp-h"><span class="num">STEP 2</span><h3>受託審査・見積</h3><span class="dur">2〜4週間</span><span class="fee">無償</span></div>
         <div class="sp-b">
           <div class="lane"><span class="lk lk-us">当社</span><span class="lv">引き受けてよい案件かを審査する<ul><li><b>製造所の状況確認</b>——国内なら医療機器製造業の登録の有無、海外なら<b>外国製造業者の登録</b>が可能か</li><li>技術文書が日本語または英語で提供されるか</li><li>重大なリコール履歴・係争の有無</li><li>反社チェック、与信</li><li>年間出荷量から従量料金を設計</li></ul></span></div>
@@ -475,7 +533,7 @@
       </div>
 
       <!-- 3 -->
-      <div class="sp">
+<div class="sp" id="step3">
         <div class="sp-h"><span class="num">STEP 3</span><h3>契約</h3><span class="dur">1〜2週間</span><span class="fee">初期費用の入金</span></div>
         <div class="sp-b">
           <div class="lane"><span class="lk lk-us">当社</span><span class="lv">4つの文書を締結する<ul><li><b>製造販売受託契約</b>（顧客と当社）——役割分担、費用、<b>認証の帰属</b>、最低契約期間、解約条件</li><li><b>製造委託契約</b>（当社と製造所）</li><li><b>品質に関する取決め書</b>（QMS省令上、製造所との間で必須）</li><li><b>安全管理に関する取決め</b>（GVP省令）</li></ul></span></div>
@@ -486,7 +544,7 @@
       </div>
 
       <!-- 4 -->
-      <div class="sp">
+<div class="sp" id="step4">
         <div class="sp-h"><span class="num">STEP 4</span><h3>技術文書と試験</h3><span class="dur">1〜4か月</span><span class="fee">試験費用（実費）</span></div>
         <div class="sp-b">
           <div class="lane"><span class="lk lk-us">当社</span><span class="lv"><ul><li>基本要件基準への適合性を整理する</li><li>技術文書（設計・製造・性能・安全性）をまとめる</li><li><b>添付文書を作成する</b></li><li><b>法定表示を設計する</b>——製造販売業者名は当社になる。パッケージの改版が必要</li><li>試験機関の選定と手配</li></ul></span></div>
@@ -497,7 +555,7 @@
       </div>
 
       <!-- 5 -->
-      <div class="sp">
+<div class="sp" id="step5">
         <div class="sp-h"><span class="num">STEP 5</span><h3>申請・審査</h3><span class="dur">クラスI：即時／クラスII：2〜3か月</span><span class="fee">審査費用</span></div>
         <div class="sp-b">
           <div class="lane"><span class="lk lk-us">当社</span><span class="lv"><b>判定Bの場合</b>——製造販売届書を提出する。<b>届け出た時点で販売可能</b>になる<br><br><b>判定Cの場合</b>——登録認証機関を選定し、認証申請と<b>QMS適合性調査</b>を申請する。照会事項に回答する</span></div>
@@ -509,7 +567,7 @@
       </div>
 
       <!-- 6 -->
-      <div class="sp">
+<div class="sp" id="step6">
         <div class="sp-h"><span class="num">STEP 6</span><h3>上市準備</h3><span class="dur">1〜2か月（STEP 5と並行）</span><span class="fee">—</span></div>
         <div class="sp-b">
           <div class="lane"><span class="lk lk-us">当社</span><span class="lv"><ul><li>パッケージの法定表示を最終確認する</li><li>添付文書を公表する</li><li><b>LP・広告・モール掲載の改訂案をチェックする</b>——認証された範囲内に収まっているか</li><li>顧客が自ら販売する場合、<b>管理医療機器の販売業届出</b>（営業所ごと）を案内する</li><li>出荷判定の手順を確立する</li></ul></span></div>
@@ -520,7 +578,7 @@
       </div>
 
       <!-- 7 -->
-      <div class="sp">
+<div class="sp" id="step7">
         <div class="sp-h"><span class="num">STEP 7</span><h3>出荷開始・継続運用</h3><span class="dur">継続</span><span class="fee">月額＋従量</span></div>
         <div class="sp-b">
           <div class="lane"><span class="lk lk-us">当社</span><span class="lv"><ul><li><b>ロットごとの出荷判定</b>と記録の保管</li><li>不具合情報の収集・評価・報告</li><li>広告表現の継続チェック</li><li>製造所の管理監督</li><li>認証内容の変更手続き、許可の更新管理</li></ul></span></div>
